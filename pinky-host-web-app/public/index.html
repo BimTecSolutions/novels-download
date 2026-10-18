@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f0a1e">
+<title>Pinky Novels – Download for Android</title>
+<meta name="description" content="Read Sinhala novels anytime. Tap anywhere to download the Pinky Novels Android app.">
+<meta property="og:title" content="Pinky Novels – Download for Android">
+<meta property="og:description" content="Read Sinhala novels anytime. Tap anywhere to download the app.">
+<meta property="og:image" content="poster-1.jpeg">
+<link rel="preload" as="image" href="poster-1.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Noto+Sans+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f0a1e; --card:#1b1333; --pink:#ff4fa3; --violet:#7c5cff; --text:#f6f1ff; --muted:#b9acd9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Poppins','Noto Sans Sinhala',system-ui,sans-serif;
+    background:var(--bg); color:var(--text);
+    min-height:100vh; overflow-x:hidden; cursor:pointer;
+    padding-bottom:calc(96px + env(safe-area-inset-bottom));
+  }
+  /* animated background blobs */
+  .blob{position:fixed;border-radius:50%;filter:blur(80px);opacity:.55;z-index:-1;animation:float 14s ease-in-out infinite}
+  .b1{width:320px;height:320px;background:var(--pink);top:-90px;left:-90px}
+  .b2{width:360px;height:360px;background:var(--violet);bottom:-120px;right:-120px;animation-delay:-6s}
+  .b3{width:200px;height:200px;background:#ff9a5c;top:45%;left:60%;opacity:.25;animation-delay:-3s}
+  @keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,40px) scale(1.12)}}
+
+  .wrap{max-width:560px;margin:0 auto;padding:0 20px}
+
+  /* in-app browser notice */
+  #inapp{display:none;background:#ffd166;color:#2a1b00;font-size:14px;padding:10px 14px;text-align:center;font-weight:600}
+  #inapp button{margin-left:8px;border:0;background:#2a1b00;color:#ffd166;padding:6px 12px;border-radius:999px;font:inherit;font-size:13px}
+
+  header{padding:28px 0 8px;text-align:center}
+  .badge{display:inline-block;padding:6px 14px;border-radius:999px;font-size:12px;letter-spacing:.08em;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:var(--muted);backdrop-filter:blur(8px)}
+  h1{font-size:clamp(38px,11vw,60px);font-weight:800;line-height:1.05;margin:16px 0 10px;
+    background:linear-gradient(120deg,#fff 10%,var(--pink) 60%,#ffb36b);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);font-size:16px;line-height:1.6;max-width:420px;margin:0 auto}
+
+  /* hero poster */
+  .hero{position:relative;margin:30px auto 10px;width:min(72vw,300px)}
+  .hero img{width:100%;display:block;border-radius:28px;border:3px solid rgba(255,255,255,.18);
+    box-shadow:0 30px 70px rgba(255,79,163,.35),0 8px 24px rgba(0,0,0,.5);transform:rotate(-3deg);animation:bob 5s ease-in-out infinite}
+  .hero::before{content:"";position:absolute;inset:8% -10% -4% 10%;border-radius:28px;background:linear-gradient(160deg,var(--violet),var(--pink));
+    transform:rotate(5deg);opacity:.5;z-index:-1}
+  @keyframes bob{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-2deg) translateY(-10px)}}
+
+  /* CTA */
+  .cta{display:flex;flex-direction:column;align-items:center;gap:12px;margin:34px 0 10px}
+  .btn{display:inline-flex;align-items:center;gap:12px;border:0;cursor:pointer;color:#fff;font:700 18px 'Poppins','Noto Sans Sinhala',sans-serif;
+    padding:18px 34px;border-radius:999px;background:linear-gradient(120deg,var(--pink),var(--violet));
+    box-shadow:0 12px 34px rgba(255,79,163,.45);animation:pulse 2s infinite;text-decoration:none}
+  .btn svg{width:24px;height:24px}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,79,163,.6),0 12px 34px rgba(255,79,163,.45)}70%{box-shadow:0 0 0 22px rgba(255,79,163,0),0 12px 34px rgba(255,79,163,.45)}100%{box-shadow:0 0 0 0 rgba(255,79,163,0),0 12px 34px rgba(255,79,163,.45)}}
+  .meta{font-size:13px;color:var(--muted)}
+  .alt{font-size:13px;color:var(--muted)}
+  .alt a{color:var(--text);text-decoration:underline;padding:8px 2px;display:inline-block}
+
+  /* poster carousel */
+  h2{font-size:22px;font-weight:700;margin:44px 0 14px}
+  .carousel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 20px 26px;
+    margin:0 -20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .carousel::-webkit-scrollbar{display:none}
+  .carousel img{flex:0 0 74%;max-width:300px;scroll-snap-align:center;border-radius:22px;
+    border:2px solid rgba(255,255,255,.12);box-shadow:0 16px 40px rgba(0,0,0,.45);background:var(--card)}
+  .hint{font-size:13px;color:var(--muted);text-align:center;margin-top:-6px}
+
+  /* steps */
+  .steps{display:grid;gap:12px}
+  .step{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:18px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px)}
+  .num{flex:0 0 36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:700;
+    background:linear-gradient(120deg,var(--pink),var(--violet))}
+  .step b{display:block;margin-bottom:2px}
+  .step span{color:var(--muted);font-size:14px;line-height:1.5}
+
+  footer{text-align:center;color:var(--muted);font-size:12px;margin:36px 0 0}
+
+  /* sticky bottom bar */
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:10;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:rgba(15,10,30,.85);backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,.1);
+    display:flex;align-items:center;justify-content:center;gap:10px;font-weight:600;font-size:15px}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--pink);animation:blink 1.2s infinite}
+  @keyframes blink{50%{opacity:.25}}
+
+  /* toast */
+  #toast{position:fixed;left:50%;top:20px;transform:translate(-50%,-140%);z-index:20;max-width:90vw;
+    background:#fff;color:#1b1333;padding:14px 20px;border-radius:16px;font-weight:600;font-size:14px;text-align:center;
+    box-shadow:0 14px 40px rgba(0,0,0,.4);transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
+  #toast.show{transform:translate(-50%,0)}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<div id="inapp">Downloads may be blocked in this browser.
+  <button id="openChrome" type="button">Open in Chrome</button></div>
+
+<div class="wrap">
+  <header>
+    <span class="badge">ANDROID APP · FREE</span>
+    <h1>Pinky Novels</h1>
+    <p class="sub">ඔබේ ප්‍රියතම සිංහල නවකතා, ඕනෑම වේලාවක කියවන්න.<br>Read your favourite Sinhala novels anytime.</p>
+  </header>
+
+  <div class="hero"><img src="poster-1.jpeg" alt="Pinky Novels app poster" width="600" height="900" fetchpriority="high"></div>
+
+  <div class="cta">
+    <a class="btn" id="dlBtn" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+      <span>ඩවුන්ලෝඩ් කරන්න · Download</span>
+    </a>
+    <div class="meta" id="sizeMeta">Android · APK · ~27 MB</div>
+    <div class="alt">Not installing? <a href="#" data-abi="v7a">Older phone (32-bit)</a> · <a href="#" data-abi="x64">x86_64</a></div>
+  </div>
+
+  <h2>Preview</h2>
+  <div class="carousel">
+    <img src="poster-2.jpeg" alt="Poster 2" loading="lazy">
+    <img src="poster-3.jpeg" alt="Poster 3" loading="lazy">
+    <img src="poster-4.jpeg" alt="Poster 4" loading="lazy">
+    <img src="poster-5.jpeg" alt="Poster 5" loading="lazy">
+  </div>
+  <p class="hint">← swipe →</p>
+
+  <h2>How to install</h2>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><div><b>Download the APK</b><span>Tap anywhere on this page or the Download button.</span></div></div>
+    <div class="step"><div class="num">2</div><div><b>Open the file</b><span>When the download finishes, tap the notification or open it from your Downloads.</span></div></div>
+    <div class="step"><div class="num">3</div><div><b>Allow installation</b><span>If asked, allow “Install unknown apps” for your browser, then tap Install.</span></div></div>
+  </div>
+
+  <footer>© <span id="yr"></span> Pinky Novels · Made in Sri Lanka</footer>
+</div>
+
+<div class="bar"><span class="dot"></span><span>Tap anywhere to download</span></div>
+<div id="toast" role="status"></div>
+
+<script>
+  // ---- Settings you may change ----
+  var REPO = "YOUR_USERNAME/pinky-novels";   // GitHub username/repository
+  var FILES = {
+    arm64: { file: "app-arm64-v8a-release.apk",   size: "~27 MB" },
+    v7a:   { file: "app-armeabi-v7a-release.apk", size: "~22 MB" },
+    x64:   { file: "app-x86_64-release.apk",      size: "~28 MB" }
+  };
+  // ---------------------------------
+  var choice = "arm64";   // default: nearly all modern Android phones
+
+  function urlFor(k){
+    return "https://github.com/" + REPO + "/releases/latest/download/" + FILES[k].file;
+  }
+  function refresh(){
+    document.getElementById("sizeMeta").textContent = "Android · APK · " + FILES[choice].size;
+    document.getElementById("dlBtn").href = urlFor(choice);
+  }
+
+  // Pick the best build for this phone (Chrome on Android exposes CPU info)
+  if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues){
+    navigator.userAgentData.getHighEntropyValues(["architecture","bitness"]).then(function(v){
+      if (v.architecture === "x86") choice = (v.bitness === "64") ? "x64" : "v7a";
+      else if (v.architecture === "arm" && v.bitness === "32") choice = "v7a";
+      refresh();
+    }).catch(function(){});
+  }
+
+  var ua = navigator.userAgent || "";
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+  var isInApp = /FBAN|FBAV|Instagram|Line\/|MicroMessenger|Snapchat|TikTok|Messenger/i.test(ua);
+  var last = 0;
+  var toast = document.getElementById("toast");
+  var toastTimer;
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  function say(msg, ms){
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove("show"); }, ms || 4500);
+  }
+
+  function startDownload(key, force){
+    if (isIOS){ say("This app is for Android phones only."); return; }
+    var now = Date.now();
+    if (!force && now - last < 5000) return;   // ignore double taps
+    last = now;
+    var a = document.createElement("a");
+    a.href = urlFor(key);
+    a.download = FILES[key].file;
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    say("Download started… check your notifications ⬇️");
+  }
+
+  // Tap/click anywhere (swiping the carousel does not count as a click)
+  document.addEventListener("click", function(e){
+    if (e.target.closest("#openChrome")) return;
+    var alt = e.target.closest("a[data-abi]");
+    if (alt){ e.preventDefault(); startDownload(alt.getAttribute("data-abi"), true); return; }
+    if (e.target.closest("#dlBtn")) { e.preventDefault(); }
+    startDownload(choice);
+  });
+  refresh();
+
+  if (isInApp && /Android/i.test(ua)){
+    document.getElementById("inapp").style.display = "block";
+    document.getElementById("openChrome").addEventListener("click", function(ev){
+      ev.stopPropagation();
+      var u = location.href.replace(/^https?:\/\//, "");
+      location.href = "intent://" + u + "#Intent;scheme=https;package=com.android.chrome;end";
+    });
+  }
+</script>
+</body>
+</html>
